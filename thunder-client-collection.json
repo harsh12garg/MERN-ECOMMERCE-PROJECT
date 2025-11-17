@@ -1,0 +1,93 @@
+{
+  "clientName": "Thunder Client",
+  "collectionName": "E-Commerce API",
+  "collectionId": "ecommerce-api",
+  "dateExported": "2024-01-01",
+  "version": "1.0",
+  "folders": [
+    {
+      "id": "auth-folder",
+      "name": "Authentication",
+      "requests": []
+    },
+    {
+      "id": "users-folder",
+      "name": "Users",
+      "requests": []
+    },
+    {
+      "id": "products-folder",
+      "name": "Products",
+      "requests": []
+    }
+  ],
+  "requests": [
+    {
+      "id": "register",
+      "name": "Register User",
+      "url": "http://localhost:5000/api/auth/register",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+      },
+      "folderId": "auth-folder"
+    },
+    {
+      "id": "login",
+      "name": "Login User",
+      "url": "http://localhost:5000/api/auth/login",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+      },
+      "folderId": "auth-folder"
+    },
+    {
+      "id": "get-me",
+      "name": "Get Current User",
+      "url": "http://localhost:5000/api/auth/me",
+      "method": "GET",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}"
+        }
+      ],
+      "folderId": "auth-folder"
+    },
+    {
+      "id": "get-products",
+      "name": "Get All Products",
+      "url": "http://localhost:5000/api/products",
+      "method": "GET",
+      "folderId": "products-folder"
+    },
+    {
+      "id": "get-profile",
+      "name": "Get User Profile",
+      "url": "http://localhost:5000/api/users/profile",
+      "method": "GET",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}"
+        }
+      ],
+      "folderId": "users-folder"
+    }
+  ]
+}
