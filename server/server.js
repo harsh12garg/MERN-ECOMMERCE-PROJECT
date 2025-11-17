@@ -57,6 +57,51 @@ app.get('/', (req, res) => {
   res.json({ message: 'E-Commerce API is running...' });
 });
 
+// ⚠️ TEMPORARY ADMIN CREATION ROUTE - DELETE AFTER USE
+app.get('/create-admin', async (req, res) => {
+  try {
+    const User = (await import('./models/User.js')).default;
+    
+    // Check if admin already exists
+    const adminExists = await User.findOne({ email: 'admin@ecommerce.com' });
+    if (adminExists) {
+      return res.json({ 
+        success: false, 
+        message: '❌ Admin already exists!',
+        email: 'admin@ecommerce.com'
+      });
+    }
+
+    // Create admin
+    const admin = new User({
+      name: 'Admin',
+      email: 'admin@ecommerce.com',
+      password: 'Admin@123',
+      role: 'admin',
+      emailVerified: true,
+      isActive: true
+    });
+
+    await admin.save();
+
+    res.json({ 
+      success: true,
+      message: '✅ Admin created successfully!',
+      credentials: {
+        email: 'admin@ecommerce.com',
+        password: 'Admin@123'
+      },
+      warning: '⚠️ DELETE THIS ROUTE IMMEDIATELY!'
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false,
+      message: '❌ Error creating admin',
+      error: error.message 
+    });
+  }
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
