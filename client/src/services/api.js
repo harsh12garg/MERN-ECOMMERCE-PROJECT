@@ -1,9 +1,16 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 
+// Get base URL and ensure it ends with /api
+let API_URL = import.meta.env.VITE_API_URL || 
   (import.meta.env.MODE === 'production' 
     ? 'https://ecommerce-backend-sy1e.onrender.com/api'
     : 'http://localhost:5000/api');
+
+// Fix: Remove trailing slash and ensure /api is present
+API_URL = API_URL.replace(/\/$/, ''); // Remove trailing slash
+if (!API_URL.endsWith('/api')) {
+  API_URL = API_URL + '/api';
+}
 
 // Debug log
 console.log('🔧 API Configuration:', {
